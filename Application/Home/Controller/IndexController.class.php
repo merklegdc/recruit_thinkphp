@@ -173,7 +173,7 @@ class IndexController extends RestController {
         switch ($this->_method){
             case 'get': // get请求处理代码
                 if(isset($_SERVER['HTTP_X_ORIGINAL_URL'])){
-                    $name=substr($_SERVER['HTTP_X_ORIGINAL_URL'],strrpos($_SERVER['HTTP_X_ORIGINAL_URL'],'/')); 
+                    $name=urldecode(substr($_SERVER['HTTP_X_ORIGINAL_URL'],strrpos($_SERVER['HTTP_X_ORIGINAL_URL'],'/')+1)); 
                 }
                 if(empty($name)){
                     //$this->response(D('candidate')->select(),'json');
@@ -194,7 +194,6 @@ class IndexController extends RestController {
                 if(isset($_SERVER['HTTP_X_ORIGINAL_URL'])){
                     $name=urldecode(substr($_SERVER['HTTP_X_ORIGINAL_URL'],strrpos($_SERVER['HTTP_X_ORIGINAL_URL'],'/')+1)); 
                 }
-                $this->response($name,'json');
                 if(empty($name)){
                     //$this->response(D('candidate')->select(),'json');
                 }else{

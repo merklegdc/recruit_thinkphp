@@ -45,7 +45,7 @@ class DownloadController extends RestController {
                 }
                 $objWriter = \PHPExcel_IOFactory::createWriter($objPHPexcel, "Excel2007");   
                 $objWriter->save($TEMP_PATH.$fileName);
-                $http->download($TEMP_PATH.$fileName, 'Campus Tracking'.date("Y-m-d").'xlsx');
+                $http->download($TEMP_PATH.$fileName, 'Campus Tracking'.date("Y-m-d").'.xlsx');
                 break;
         }
     }

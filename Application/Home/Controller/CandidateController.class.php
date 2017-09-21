@@ -24,6 +24,7 @@ class CandidateController extends RestController {
                         $data[$key]=null;
                     }
                 }
+                $data['if_group'] = ($data['service_line']=='Analytics and Data Products') ? 'Y' : 'N';
                 $data['created_date']=date("Y-m-d");
                 $data['created_by']=$_SERVER['LOGON_USER'];
                 if(empty($data["candidate_id"])){

@@ -13,7 +13,7 @@ class InterviewController extends RestController {
                 $all=M('vw_interview')->where(array('candidate_id'=>$id,'type'=>$type))->find();
                 if(empty($all))
                     $this->response(array(0),'json');
-                $interview=M('vw_interview')->distinct(true)->field('interview_id,interviewer_id,interviewer_name,type,sum,passed,comment')->where(array('candidate_id'=>$id,'type'=>$type))->find();
+                $interview=M('vw_interview')->distinct(true)->field('interview_id,interviewer_id,interviewer_name,date,type,sum,passed,comment')->where(array('candidate_id'=>$id,'type'=>$type))->find();
                 $score=M('vw_interview')->distinct(true)->field('score_cd,score,question,weight')->where(array('candidate_id'=>$id,'type'=>$type))->select();
                 $common=M('vw_interview')->distinct(true)->field('score_cd,score,weight')->where(array('candidate_id'=>$id,'type'=>6))->select();
                 $this->response(array(array('interview'=>$interview,'score'=>$score,'common'=>$common)),'json');
@@ -23,14 +23,15 @@ class InterviewController extends RestController {
                 $data['created_date']=date("Y-m-d");
                 $data['created_by']=$_SERVER['LOGON_USER'];
                 if($id == -1)
-                    $i=D('interview')->field('candidate_id,interviewer_id,type,comment,created_date,created_by')
-                    ->addData(array('candidate_id'=>$data['candidate_id'],'interviewer_id'=>$data['interview1'][interviewer_id],'type'=>$data['interview1'][type],
+                    $i=D('interview')->field('candidate_id,interviewer_id,date,type,comment,created_date,created_by')
+                    ->addData(array('candidate_id'=>$data['candidate_id'],'interviewer_id'=>$data['interview1'][interviewer_id],
+                    'date'=>$data['interview1'][date],'type'=>$data['interview1'][type],
                         'comment'=>$data['interview1'][comment],'created_date'=>date("Y-m-d"),'created_by'=>$_SERVER['LOGON_USER']));
                 else{
                     $i=$id;
-                    D('interview')->field('interview_id,candidate_id,interviewer_id,type,comment,created_date,created_by')
+                    D('interview')->field('interview_id,candidate_id,interviewer_id,date,type,comment,created_date,created_by')
                     ->save(array('interview_id'=>$id,'candidate_id'=>$data['candidate_id'],'interviewer_id'=>$data['interview1'][interviewer_id],
-                        'type'=>$data['interview1'][type], 'comment'=>$data['interview1'][comment],'created_date'=>date("Y-m-d"),'created_by'=>$_SERVER['LOGON_USER']));
+                    'date'=>$data['interview1'][date],'type'=>$data['interview1'][type], 'comment'=>$data['interview1'][comment],'created_date'=>date("Y-m-d"),'created_by'=>$_SERVER['LOGON_USER']));
                 }
                 D('score')->where(array('interview_id'=>$i))->delete();
                 for($x=0;$x<count($data['interview1'][score]);$x++){

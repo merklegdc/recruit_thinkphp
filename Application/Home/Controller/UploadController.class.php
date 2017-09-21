@@ -60,18 +60,19 @@ class UploadController extends Controller {
             if(empty($arr[$i+2])){
                 continue;
             }
+            $if_group = ($arr[$i+5]=='Analytics and Data Products') ? 'Y' : 'N';
             if(empty($arr[$i+1])){
                 $record=array('name_cn'=>$arr[$i+2], 'name_en'=>$arr[$i+3], 'assign_date'=>$arr[$i+4], 'service_line'=>$arr[$i+5], 
                 'position'=>$arr[$i+6],'location'=>$arr[$i+7], 'gender'=>$arr[$i+8], 'degree'=>$arr[$i+9], 'university'=>$arr[$i+10], 
                 'major'=>$arr[$i+11], 'graduation_date'=>$arr[$i+12], 'phone'=>$arr[$i+13], 'email'=>$arr[$i+14], 
-                'receive_date'=>$arr[$i+15], 'channel'=>$arr[$i+16],'recommender'=>$arr[$i+17],
+                'receive_date'=>$arr[$i+15], 'channel'=>$arr[$i+16],'recommender'=>$arr[$i+17], 'if_group'=>$if_group,
                 'created_date'=>date("Y-m-d"),'created_by'=>$_SERVER['LOGON_USER']);
                 M('candidate')->add($record);
             }else{
                 $record=array('candidate_id'=>$arr[$i+1],'name_cn'=>$arr[$i+2], 'name_en'=>$arr[$i+3], 'assign_date'=>$arr[$i+4], 'service_line'=>$arr[$i+5], 
                 'position'=>$arr[$i+6],'location'=>$arr[$i+7], 'gender'=>$arr[$i+8], 'degree'=>$arr[$i+9], 'university'=>$arr[$i+10], 
                 'major'=>$arr[$i+11], 'graduation_date'=>$arr[$i+12], 'phone'=>$arr[$i+13], 'email'=>$arr[$i+14], 
-                'receive_date'=>$arr[$i+15], 'channel'=>$arr[$i+16],'recommender'=>$arr[$i+17],
+                'receive_date'=>$arr[$i+15], 'channel'=>$arr[$i+16],'recommender'=>$arr[$i+17], 'if_group'=>$if_group,
                 'created_date'=>date("Y-m-d"),'created_by'=>$_SERVER['LOGON_USER']);
                 M('candidate')->save($record);
             }

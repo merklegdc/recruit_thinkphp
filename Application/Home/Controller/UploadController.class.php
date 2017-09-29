@@ -39,14 +39,13 @@ class UploadController extends Controller {
             $arr = array('A','B','C','D','E','F','G','H','I','J','K','L','M', 'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
             'AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK');  
             // 一次读取一列  
-            $res_arr = array();  
+            $res_arr = array();
             for ($row = 2; $row <= $highestRow; $row++) {  
                 $row_arr = array();  
                 for ($column = 0; $arr[$column] != 'AK'; $column++) {  
                     $val = $sheet->getCellByColumnAndRow($column, $row)->getValue();
                     $row_arr[] = $val;  
                 }  
-                  
                 $res_arr[] = $row_arr;  
             }  
             $this->ajaxReturn($res_arr);

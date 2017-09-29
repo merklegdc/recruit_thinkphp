@@ -52,37 +52,25 @@ class DownloadController extends RestController {
     public function downloadData(){
         switch ($this->_method){
             case 'options':
-                $this->response(0,'json');
-                break;
+            $this->response(0,'json');
+            break;
             case 'get':
                 $data = M('candidate')->select();
-                $i = 0;
-                $j = 0;
-                $response = array(array());
-                foreach ($data as $record ) { 
-                    $response[$i][$j+0] = '';
-                    $response[$i][$j+1] = '';
-                    $response[$i][$j+2] = $record[candidate_id];
-                    $response[$i][$j+3] = $record[name_cn];
-                    $response[$i][$j+4] = $record[name_en];
-                    $response[$i][$j+5] = $record[assign_date];
-                    $response[$i][$j+6] = $record[service_line];
-                    $response[$i][$j+7] = $record[position];
-                    $response[$i][$j+8] = $record[location];
-                    $response[$i][$j+9] = $record[gender];
-                    $response[$i][$j+10] = $record[degree];
-                    $response[$i][$j+11] = $record[university];
-                    $response[$i][$j+12] = $record[major];
-                    $response[$i][$j+13] = $record[graduation_date];
-                    $response[$i][$j+14] = $record[phone];
-                    $response[$i][$j+15] = $record[email];
-                    $response[$i][$j+16] = $record[receive_date];
-                    $response[$i][$j+17] = $record[channel];
-                    $response[$i][$j+18] = $record[recommender];
-                    $i += 1;
-                }
-                $this->response($response,'json');
+                $this->response($data,'json');
                 break;
+        }
+    }
+    public function downloadDoc(){
+        switch ($this->_method){
+            case 'options':
+            $this->response(0,'json');
+            break;
+            case 'get':
+            $http = new \Org\Net\Http();
+            $TEMP_PATH = rtrim($Think.THINK_PATH,'ThinkPHP/').'Public\\doc\\';
+            $fileName = 'Merkle-recruitment-manual.docx';
+            $http->download($TEMP_PATH.$fileName, $fileName);
+            break;
         }
     }
 }

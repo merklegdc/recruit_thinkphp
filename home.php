@@ -20,7 +20,7 @@ define('APP_DEBUG',True);
 // 定义应用目录
 define('APP_PATH','./Application/');
 define('BUILD_DIR_SECURE', false);
-define('APP_STATUS','home');
+define('APP_STATUS','dev');
 define('BIND_MODULE','Home');
 // define('BIND_CONTROLLER','Index');
 // 引入ThinkPHP入口文件

@@ -16,24 +16,27 @@ class DownloadController extends RestController {
                 $objWorksheet = $objPHPexcel->getSheet(0);
                 $data = M('candidate')->select();
                 $i = 2;
+                $j = 2;
                 foreach ($data as $record ) { 
-                    $objWorksheet->getCellByColumnAndRow(1, $i)->setValue($record[candidate_id]);
-                    $objWorksheet->getCellByColumnAndRow(2, $i)->setValue($record[name_cn]);
-                    $objWorksheet->getCellByColumnAndRow(3, $i)->setValue($record[name_en]);
-                    $objWorksheet->getCellByColumnAndRow(4, $i)->setValue($record[assign_date]);
-                    $objWorksheet->getCellByColumnAndRow(5, $i)->setValue($record[service_line]);
-                    $objWorksheet->getCellByColumnAndRow(6, $i)->setValue($record[position]);
-                    $objWorksheet->getCellByColumnAndRow(7, $i)->setValue($record[location]);
-                    $objWorksheet->getCellByColumnAndRow(8, $i)->setValue($record[gender]);
-                    $objWorksheet->getCellByColumnAndRow(9, $i)->setValue($record[degree]);
-                    $objWorksheet->getCellByColumnAndRow(10, $i)->setValue($record[university]);
-                    $objWorksheet->getCellByColumnAndRow(11, $i)->setValue($record[major]);
-                    $objWorksheet->getCellByColumnAndRow(12, $i)->setValue($record[graduation_date]);
-                    $objWorksheet->getCellByColumnAndRow(13, $i)->setValue($record[phone]);
-                    $objWorksheet->getCellByColumnAndRow(14, $i)->setValue($record[email]);
-                    $objWorksheet->getCellByColumnAndRow(15, $i)->setValue($record[receive_date]);
-                    $objWorksheet->getCellByColumnAndRow(16, $i)->setValue($record[channel]);
-                    $objWorksheet->getCellByColumnAndRow(17, $i)->setValue($record[recommender]);
+                    $objWorksheet->getCellByColumnAndRow($j-1, $i)->setValue($record[status]);
+                    $objWorksheet->getCellByColumnAndRow($j, $i)->setValue($record[if_active]);
+                    $objWorksheet->getCellByColumnAndRow($j+1, $i)->setValue($record[candidate_id]);
+                    $objWorksheet->getCellByColumnAndRow($j+3, $i)->setValue($record[name_en]);
+                    $objWorksheet->getCellByColumnAndRow($j+2, $i)->setValue($record[name_cn]);
+                    $objWorksheet->getCellByColumnAndRow($j+4, $i)->setValue($record[assign_date]);
+                    $objWorksheet->getCellByColumnAndRow($j+5, $i)->setValue($record[service_line]);
+                    $objWorksheet->getCellByColumnAndRow($j+6, $i)->setValue($record[position]);
+                    $objWorksheet->getCellByColumnAndRow($j+7, $i)->setValue($record[location]);
+                    $objWorksheet->getCellByColumnAndRow($j+8, $i)->setValue($record[gender]);
+                    $objWorksheet->getCellByColumnAndRow($j+9, $i)->setValue($record[degree]);
+                    $objWorksheet->getCellByColumnAndRow($j+10, $i)->setValue($record[university]);
+                    $objWorksheet->getCellByColumnAndRow($j+11, $i)->setValue($record[major]);
+                    $objWorksheet->getCellByColumnAndRow($j+12, $i)->setValue($record[graduation_date]);
+                    $objWorksheet->getCellByColumnAndRow($j+13, $i)->setValue($record[phone]);
+                    $objWorksheet->getCellByColumnAndRow($j+14, $i)->setValue($record[email]);
+                    $objWorksheet->getCellByColumnAndRow($j+15, $i)->setValue($record[receive_date]);
+                    $objWorksheet->getCellByColumnAndRow($j+16, $i)->setValue($record[channel]);
+                    $objWorksheet->getCellByColumnAndRow($j+17, $i)->setValue($record[recommender]);
                     $i += 1;
                 }
                 $fileName = rand().'.xlsx';
@@ -55,7 +58,7 @@ class DownloadController extends RestController {
             $this->response(0,'json');
             break;
             case 'get':
-                $data = M('candidate')->select();
+                $data = M('vw_candidate')->select();
                 $this->response($data,'json');
                 break;
         }

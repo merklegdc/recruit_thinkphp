@@ -2,6 +2,12 @@
 namespace Home\Controller;
 use Think\Controller\RestController;
 class InterviewController extends RestController {
+    public function __construct(){
+        $this->ajaxReturn(D('candidate')->field('name_cn')->find()['name_cn']);
+        if(C('ENV') != 'dev'){
+            $name = D('vw_employee')->field('name')->where(array('code'=>$_SERVER['LOGON_USER']))->find();
+        }
+    }
     public function interview($id,$type){
         $c = D('candidate');
         $condition['candidate_id'] = $id;

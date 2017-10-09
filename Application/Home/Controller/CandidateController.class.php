@@ -2,8 +2,12 @@
 namespace Home\Controller;
 use Think\Controller\RestController;
 class CandidateController extends RestController {
+    public function __construct(){
+        if(C('ENV') != 'dev'){
+            $this->response('dev');
+        }
+    }
     public function index(){
-        $this->ajaxReturn(C('ENV'));
     }
     public function candidate($id=-1){
         $c = D('candidate');

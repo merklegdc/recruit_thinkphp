@@ -4,7 +4,7 @@ use Think\Controller\RestController;
 class CandidateController extends RestController {
     public function __construct(){
         if(C('ENV') != 'dev'){
-            $this->response('dev');
+            // $this->response('dev');
         }
     }
     public function index(){
